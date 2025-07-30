@@ -1,51 +1,61 @@
 /**
  * Mojo AI Services - Homepage
  * 
- * Aurora-themed homepage with dynamic animations and interactive elements
- * Inspired by A24 Films, Play.ai, OpenAI, and Unity design aesthetics
+ * Sophisticated homepage for creative professionals
+ * Features: 3D logo animation, GSAP scroll reveals, purposeful micro-interactions
  * 
- * Features:
- * - Animated hero text with Aurora effects
- * - Interactive text elements with hover animations
- * - Responsive design with mobile optimization
- * - Accessibility support and semantic HTML
+ * Design Philosophy:
+ * - Every animation serves a purpose
+ * - Crafted for creative professionals who value attention to detail
+ * - Performance-optimized with mobile considerations
+ * - Accessibility-first approach
  */
 
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import Logo3D from '@/components/Logo3D'
+import { fadeInStagger, scrollReveal, initPageAnimations, microInteractions } from '@/lib/animations'
 
 // =============================================================================
 // HOMEPAGE COMPONENT
 // =============================================================================
 
 export default function HomePage() {
-  const [textAnimationPhase, setTextAnimationPhase] = useState(0)
-  const [isHovering, setIsHovering] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const heroRef = useRef<HTMLElement>(null)
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const subtitleRef = useRef<HTMLParagraphElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
 
-  // Initialize animations on component mount
+  // Initialize sophisticated animations
   useEffect(() => {
-    // Stagger text animations
-    const phases = [
-      { delay: 500, phase: 1 },   // Main title
-      { delay: 1000, phase: 2 },  // Subtitle
-      { delay: 1500, phase: 3 },  // CTA button
-    ]
-    
-    phases.forEach(({ delay, phase }) => {
-      setTimeout(() => setTextAnimationPhase(phase), delay)
-    })
+    // Set loaded state after mount
+    setIsLoaded(true)
 
+    // Initialize page animations
+    const timer = setTimeout(() => {
+      // Hero section staggered reveal
+      if (titleRef.current && subtitleRef.current && ctaRef.current) {
+        fadeInStagger([titleRef.current, subtitleRef.current, ctaRef.current], {
+          duration: 0.8,
+          stagger: 0.3,
+          delay: 0.5,
+          y: 40
+        })
+      }
+    }, 500)
 
+    return () => clearTimeout(timer)
   }, [])
 
   return (
     <div className="relative min-h-screen overflow-hidden">
       
       {/* =================================================================== */}
-      {/* BACKGROUND LOGO                                                      */}
+      {/* 3D BACKGROUND LOGO                                                  */}
       {/* =================================================================== */}
       <div className="
         absolute 
@@ -53,18 +63,17 @@ export default function HomePage() {
         flex 
         items-center 
         justify-center 
-        opacity-5 
+        opacity-10 
         pointer-events-none
         z-0
       ">
-        <Image
-          src="/MojoLogo.png"
-          alt="Mojo AI Services Background Logo"
-          width={800}
-          height={800}
-          className="object-contain"
-          priority
-        />
+        <div className="w-96 h-96 max-w-[50vw] max-h-[50vh]">
+          <Logo3D 
+            autoRotate={true} 
+            intensity={0.3}
+            className="filter blur-[1px]"
+          />
+        </div>
       </div>
       
       {/* =================================================================== */}
@@ -115,19 +124,66 @@ export default function HomePage() {
           space-y-lg
         ">
           
+          {/* Hero Title */}
+          <h1 
+            ref={titleRef}
+            id="hero-title"
+            className="
+              text-hero 
+              font-bold
+              font-primary
+              leading-tight
+              tracking-tighter
+              text-white
+              opacity-0
+              transform
+              translate-y-8
+            "
+            style={{ fontFamily: 'var(--font-primary)' }}
+          >
+            Dynamically Shaping Your{' '}
+            <span className="
+              bg-gradient-to-r 
+              from-blue-400 
+              via-cyan-400 
+              to-blue-600 
+              bg-clip-text 
+              text-transparent
+              animate-gradient-flow
+            ">
+              Best Life
+            </span>
+          </h1>
           
+          {/* Hero Subtitle */}
+          <p 
+            ref={subtitleRef}
+            className="
+              text-xl
+              font-primary
+              leading-relaxed
+              tracking-normal
+              text-white/80
+              max-w-3xl
+              mx-auto
+              opacity-0
+              transform
+              translate-y-8
+            "
+            style={{ fontFamily: 'var(--font-primary)' }}
+          >
+            Where AI adapts, energy saves, and your voice leads. 
+            Cutting-edge smart home intelligence meets professional IT consulting.
+          </p>
           
           {/* Call to Action Button */}
           <div 
-            className={`
-              transition-all 
-              duration-1000 
-              ease-out
-              ${textAnimationPhase >= 3 
-                ? 'opacity-100 translate-y-0 animate-fadeIn' 
-                : 'opacity-0 translate-y-4'
-              }
-            `}
+            ref={ctaRef}
+            className="
+              opacity-0
+              transform
+              translate-y-8
+            "
           >
             <button 
               className="
@@ -149,22 +205,25 @@ export default function HomePage() {
                 relative
                 overflow-hidden
               "
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
+              onMouseEnter={(e) => {
+                const animation = microInteractions.buttonHover(e.currentTarget)
+                e.currentTarget.addEventListener('mouseleave', () => animation.reverse(), { once: true })
+              }}
             >
               <span className="relative z-10">Explore Our AI Solutions</span>
-              {isHovering && (
-                <div 
-                  className="
-                    absolute 
-                    inset-0 
-                    bg-gradient-to-r 
-                    from-aurora-cyan/20 
-                    to-aurora-blue/20 
-                    animate-pulse
-                  "
-                />
-              )}
+              <div 
+                className="
+                  absolute 
+                  inset-0 
+                  bg-gradient-to-r 
+                  from-aurora-cyan/10 
+                  to-aurora-blue/10 
+                  opacity-0
+                  transition-opacity
+                  duration-300
+                  group-hover:opacity-100
+                "
+              />
             </button>
           </div>
         </div>
