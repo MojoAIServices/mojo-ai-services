@@ -15,7 +15,7 @@ Your codebase already includes outstanding security measures:
 - ✅ **Input Validation & Output Escaping** for all contexts
 - ✅ **Rate Limiting** (60 req/min) with brute force protection
 - ✅ **Security Headers** (X-Frame-Options, HSTS, etc.)
-- ✅ **WordPress Hardening** (file editing disabled, XML-RPC off)
+- ✅ **Next.js Hardening** (security headers, CSP, rate limiting)
 - ✅ **Zero Vulnerable Dependencies** (npm audit clean)
 
 ## 🚀 **New Security Enhancements Added**
@@ -66,7 +66,7 @@ Your website implements multiple security layers:
 1. **Network Level**: HTTPS enforcement, HSTS
 2. **Application Level**: Input validation, CSRF protection
 3. **Browser Level**: CSP, security headers
-4. **WordPress Level**: File restrictions, rate limiting
+4. **Next.js Level**: File restrictions, rate limiting
 5. **Code Level**: Secure coding practices, escaping
 
 ### **Security Monitoring**
@@ -89,7 +89,7 @@ Your website is now **FULLY COMPLIANT** with:
 |------------------|----------|----------------------|
 | Input Validation | 100% | Comprehensive |
 | Output Escaping | 100% | Multi-context |
-| CSRF Protection | 100% | WordPress nonces |
+| CSRF Protection | 100% | Next.js nonces |
 | XSS Prevention | 100% | CSP + escaping |
 | Authentication | 100% | Rate limited |
 | Headers | 100% | Enhanced set |
