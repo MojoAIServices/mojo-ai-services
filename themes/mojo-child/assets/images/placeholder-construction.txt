@@ -1,0 +1,19 @@
+PLACEHOLDER FOR: stick-figure-construction.gif
+
+REQUIREMENTS:
+- Animated GIF showing stick figures doing construction work
+- Dimensions: 200x150px (or similar aspect ratio)
+- File size: Under 200KB for optimal performance  
+- Format: GIF with transparent background preferred
+- Duration: 2-4 second loop
+- Style: Simple stick figure animation
+
+SUGGESTED SOURCES:
+- Public domain construction GIFs from Pixabay, Unsplash
+- Simple stick figure construction animations
+- Under construction/work in progress themes
+
+RENAME THIS FILE TO: stick-figure-construction.gif
+
+Once you replace this placeholder with the actual GIF file, 
+the animation will appear on both the Shelby and Sunny pages. 

@@ -1,0 +1,191 @@
+/* =============================================================================
+   COMING SOON PAGES - SHELBY & SUNNY
+   Beautiful animated "under construction" pages
+   ============================================================================= */
+
+/* ── Main Page Container ──────────────────────────────────────── */
+.coming-soon-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, 
+    rgba(15, 23, 42, 0.8) 0%, 
+    rgba(30, 41, 59, 0.6) 50%, 
+    rgba(15, 23, 42, 0.8) 100%
+  );
+}
+
+.coming-soon-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Typography ──────────────────────────────────────────────── */
+.coming-soon-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: #22d3ee;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.coming-soon-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 1.5rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* ── Construction Animation ──────────────────────────────────────── */
+.construction-animation {
+  margin: 2rem 0;
+  position: relative;
+}
+
+.construction-animation img {
+  width: clamp(150px, 25vw, 250px);
+  height: auto;
+  max-width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(34, 211, 238, 0.2);
+  animation: float-bounce 4s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.construction-animation img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 40px rgba(34, 211, 238, 0.4);
+}
+
+/* ── Animations ──────────────────────────────────────────────── */
+@keyframes float-bounce {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  25% { 
+    transform: translateY(-15px) rotate(1deg); 
+  }
+  50% { 
+    transform: translateY(-10px) rotate(0deg); 
+  }
+  75% { 
+    transform: translateY(-20px) rotate(-1deg); 
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+  }
+  50% { 
+    text-shadow: 0 0 30px rgba(34, 211, 238, 0.6),
+                 0 0 40px rgba(34, 211, 238, 0.4);
+  }
+}
+
+/* ── Loading States ──────────────────────────────────────────── */
+.construction-animation img[loading="lazy"] {
+  background: linear-gradient(90deg, 
+    rgba(34, 211, 238, 0.1) 0%, 
+    rgba(34, 211, 238, 0.2) 50%, 
+    rgba(34, 211, 238, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: loading-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes loading-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Responsive Design ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .coming-soon-page {
+    min-height: 60vh;
+    padding: 1rem;
+  }
+  
+  .coming-soon-container {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+  
+  .coming-soon-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .construction-animation {
+    margin: 1.5rem 0;
+  }
+  
+  .coming-soon-subtitle {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .coming-soon-container {
+    padding: 1.5rem 1rem;
+    border-radius: 15px;
+  }
+  
+  .coming-soon-title {
+    font-size: 1.8rem;
+  }
+  
+  .construction-animation img {
+    width: 120px;
+  }
+}
+
+/* ── Dark Mode Enhancements ──────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  .coming-soon-container {
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+  }
+}
+
+/* ── Accessibility ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .construction-animation img,
+  .coming-soon-title {
+    animation: none;
+  }
+  
+  .construction-animation img {
+    transform: none;
+  }
+}
+
+/* ── Print Styles ──────────────────────────────────────────────── */
+@media print {
+  .coming-soon-page {
+    background: white;
+    color: black;
+  }
+  
+  .coming-soon-title {
+    color: #333;
+    text-shadow: none;
+  }
+  
+  .construction-animation {
+    display: none;
+  }
+} 

@@ -1,0 +1,736 @@
+/* =============================================================================
+   MOJO AI SERVICES - GLOBAL STYLES
+   Aurora-themed homepage with dynamic animations
+   Fully Responsive Design: 1920px → 375px
+   ============================================================================= */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* =============================================================================
+   RESPONSIVE BASE STYLES
+   ============================================================================= */
+
+:root {
+  /* Responsive spacing scale */
+  --space-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+  --space-sm: clamp(0.5rem, 1vw, 1rem);
+  --space-md: clamp(1rem, 2vw, 2rem);
+  --space-lg: clamp(1.5rem, 3vw, 3rem);
+  --space-xl: clamp(2rem, 4vw, 4rem);
+  --space-xxl: clamp(3rem, 6vw, 6rem);
+  
+  /* Responsive font sizes */
+  --text-xs: clamp(0.75rem, 1.5vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 2vw, 1rem);
+  --text-base: clamp(1rem, 2.5vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 3vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 3.5vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 4vw, 2rem);
+  --text-3xl: clamp(2rem, 5vw, 3rem);
+  --text-4xl: clamp(2.5rem, 6vw, 4rem);
+  --text-hero: clamp(3rem, 8vw, 6rem);
+  
+  /* Container widths */
+  --container-sm: min(90vw, 640px);
+  --container-md: min(90vw, 768px);
+  --container-lg: min(90vw, 1024px);
+  --container-xl: min(90vw, 1280px);
+  --container-2xl: min(90vw, 1536px);
+  
+  /* Responsive sidebar widths */
+  --sidebar-width-sm: 64px;
+  --sidebar-width-md: 16rem;
+  --sidebar-width-lg: 18rem;
+  --sidebar-width-xl: 20rem;
+}
+
+/* =============================================================================
+   BASE LAYOUT FIXES
+   ============================================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  /* Prevent pull-down/overscroll behavior */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  overflow-x: hidden;
+  background: radial-gradient(ellipse at center, #0f172a 0%, #020617 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent elastic scrolling on iOS */
+html {
+  overflow: hidden;
+}
+
+/* Prevent pull-to-refresh on mobile */
+body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
+}
+
+#__next {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Main content positioning for sidebar */
+.main-content {
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+
+/* Responsive sidebar margins */
+@media (min-width: 1024px) {
+  .main-content {
+    margin-left: var(--sidebar-width-md);
+  }
+}
+
+@media (min-width: 1280px) {
+  .main-content {
+    margin-left: var(--sidebar-width-lg);
+  }
+}
+
+@media (min-width: 1536px) {
+  .main-content {
+    margin-left: var(--sidebar-width-xl);
+  }
+}
+
+/* =============================================================================
+   SIDEBAR WIDTH UTILITIES
+   ============================================================================= */
+
+.w-sidebar {
+  width: var(--sidebar-width-md);
+}
+
+@media (min-width: 1280px) {
+  .w-sidebar {
+    width: var(--sidebar-width-lg);
+  }
+}
+
+@media (min-width: 1536px) {
+  .w-sidebar {
+    width: var(--sidebar-width-xl);
+  }
+}
+
+/* =============================================================================
+   MIND-BLOWING PARTICLE SYSTEM
+   ============================================================================= */
+
+.particle-system {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: clamp(1px, 0.2vw, 3px);
+  height: clamp(1px, 0.2vw, 3px);
+  background: linear-gradient(45deg, #22d3ee, #3b82f6, #8b5cf6);
+  border-radius: 50%;
+  animation: particle-float 8s infinite linear;
+  opacity: 0.6;
+}
+
+.particle:nth-child(odd) {
+  animation-duration: 12s;
+  animation-direction: reverse;
+}
+
+.particle:nth-child(3n) {
+  animation-duration: 15s;
+  background: linear-gradient(45deg, #8b5cf6, #22d3ee, #3b82f6);
+}
+
+.particle:nth-child(4n) {
+  animation-duration: 10s;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #22d3ee);
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100px) translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* =============================================================================
+   RESPONSIVE AURORA EFFECTS
+   ============================================================================= */
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(clamp(0.5rem, 2vw, 3rem));
+  animation: aurora-float-smooth 12s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: clamp(0.3, 0.6, 0.8);
+  will-change: transform;
+}
+
+/* Smooth aurora animation without strobing */
+@keyframes aurora-float-smooth {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  33% { 
+    transform: translateY(clamp(-1vh, -2vh, -3vh)) rotate(1deg) scale(1.05);
+  }
+  66% { 
+    transform: translateY(clamp(0.5vh, 1vh, 2vh)) rotate(-1deg) scale(0.95);
+  }
+}
+
+.aurora-orb-1 {
+  width: clamp(15rem, 30vw, 40rem);
+  height: clamp(15rem, 30vw, 40rem);
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.3) 0%, transparent 70%);
+  top: clamp(-15%, -10%, -5%);
+  left: clamp(-15%, -10%, -5%);
+  animation-delay: 0s;
+}
+
+.aurora-orb-2 {
+  width: clamp(12rem, 25vw, 30rem);
+  height: clamp(12rem, 25vw, 30rem);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+  top: clamp(15%, 20%, 25%);
+  right: clamp(-20%, -15%, -10%);
+  animation-delay: -4s;
+}
+
+.aurora-orb-3 {
+  width: clamp(18rem, 35vw, 50rem);
+  height: clamp(18rem, 35vw, 50rem);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+  bottom: clamp(-25%, -20%, -15%);
+  left: clamp(15%, 20%, 25%);
+  animation-delay: -8s;
+}
+
+/* =============================================================================
+   RESPONSIVE NEURAL NETWORK GRID EFFECT
+   ============================================================================= */
+
+.neural-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: 
+    linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px);
+  background-size: clamp(30px, 5vw, 60px) clamp(30px, 5vw, 60px);
+  animation: grid-pulse 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+@keyframes grid-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* =============================================================================
+   ANIMATE.CSS INTEGRATION (Key Animations)
+   ============================================================================= */
+
+/* Fade In Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bounceInUp {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30vh, 0) scaleY(5);
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(0, -2vh, 0) scaleY(0.9);
+  }
+  75% {
+    transform: translate3d(0, 1vh, 0) scaleY(0.95);
+  }
+  90% {
+    transform: translate3d(0, -0.5vh, 0) scaleY(0.985);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes lightSpeedIn {
+  from {
+    transform: translate3d(100%, 0, 0) skewX(-30deg);
+    opacity: 0;
+  }
+  60% {
+    transform: skewX(20deg);
+    opacity: 1;
+  }
+  80% {
+    transform: skewX(-5deg);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes rubberBand {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes gradient-rotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* =============================================================================
+   MIND-BLOWING HOVER EFFECTS
+   ============================================================================= */
+
+.glow-on-hover {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-on-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.4), transparent);
+  transition: left 0.5s ease;
+}
+
+.glow-on-hover:hover::before {
+  left: 100%;
+}
+
+.glow-on-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 10px 30px rgba(34, 211, 238, 0.3),
+    0 0 20px rgba(34, 211, 238, 0.2);
+}
+
+/* =============================================================================
+   ANIMATION CLASSES
+   ============================================================================= */
+
+.animate-fadeIn { animation: fadeIn 0.5s ease-out; }
+.animate-fadeInUp { animation: fadeInUp 0.6s ease-out; }
+.animate-bounceInUp { animation: bounceInUp 1s ease-out; }
+.animate-lightSpeedIn { animation: lightSpeedIn 0.8s ease-out; }
+.animate-rubberBand { animation: rubberBand 1s ease-out; }
+.animate-gradient-rotate { animation: gradient-rotate 3s ease infinite; }
+
+/* Hover effects */
+@keyframes bounce-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.5rem); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-bounce-gentle { animation: bounce-gentle 2s ease-in-out infinite; }
+.animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+
+/* =============================================================================
+   RESPONSIVE MEDIA QUERIES
+   ============================================================================= */
+
+/* Desktop Large - 1440px and up */
+@media (min-width: 1440px) {
+  :root {
+    --space-hero: 8rem;
+    --text-hero: 6rem;
+  }
+  
+  .hero-section {
+    padding: var(--space-hero) var(--space-xl);
+  }
+  
+  .feature-highlights {
+    gap: 3rem;
+  }
+}
+
+/* Desktop - 1024px to 1439px */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  :root {
+    --space-hero: 6rem;
+    --text-hero: 5rem;
+  }
+  
+  .main-content {
+    margin-left: 16rem;
+  }
+}
+
+/* Tablet - 768px to 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --space-hero: 4rem;
+    --text-hero: 4rem;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .feature-highlights {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .hero-content {
+    max-width: 90vw;
+    padding: var(--space-lg);
+  }
+}
+
+/* Mobile Large - 480px to 767px */
+@media (min-width: 480px) and (max-width: 767px) {
+  :root {
+    --space-hero: 3rem;
+    --text-hero: 3rem;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .feature-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .feature-highlight {
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .hero-content {
+    padding: var(--space-md);
+    text-align: center;
+  }
+}
+
+/* Mobile Small - 375px to 479px */
+@media (max-width: 479px) {
+  :root {
+    --space-hero: 2rem;
+    --text-hero: 2.5rem;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .hero-content {
+    padding: var(--space-sm);
+  }
+  
+  .feature-highlights {
+    padding: var(--space-sm);
+  }
+  
+  .glass-light {
+    padding: var(--space-sm);
+  }
+  
+  /* Stack floating elements vertically */
+  .floating-elements {
+    flex-direction: column;
+    gap: var(--space-sm);
+    bottom: var(--space-md);
+  }
+}
+
+/* =============================================================================
+   RESPONSIVE UTILITY CLASSES
+   ============================================================================= */
+
+.container-responsive {
+  width: 100%;
+  max-width: var(--container-2xl);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.text-responsive {
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+
+.spacing-responsive {
+  margin: var(--space-md) 0;
+}
+
+/* Prevent text overflow on all screen sizes */
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Flexible image containers */
+.image-responsive {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Glass morphism effects */
+.glass-light {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(1rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(1.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Interactive text utilities */
+.interactive-text {
+  transition: all 0.3s ease;
+  cursor: default;
+  display: inline-block;
+}
+
+.interactive-text:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 0 20px currentColor;
+}
+
+/* Hover grow effect */
+.hover-grow {
+  transition: transform 0.3s ease;
+}
+
+.hover-grow:hover {
+  transform: scale(1.05) translateY(-2px);
+}
+
+/* =============================================================================
+   CURSOR PROMPT ENHANCEMENTS - Applied to Next.js
+   ============================================================================= */
+
+/* 1. CENTERED BRAND BADGE */
+#brand-badge {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: clamp(0.8rem, 0.9vw, 1rem);
+  font-weight: 600;
+  color: #e8f3ff;
+  text-decoration: none;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeBrand 0.6s ease-out 0.15s forwards;
+}
+
+#brand-badge img {
+  height: 34px;
+  width: auto;
+}
+
+#brand-badge:hover {
+  filter: brightness(1.15);
+}
+
+@keyframes fadeBrand {
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+/* 3. CSS GRID FOR FEATURE CARDS */
+.cta-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1440px) {
+  .cta-grid { gap: 2rem; }
+}
+
+.feature-card-enhanced {
+  min-height: 160px;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.feature-card-enhanced:hover {
+  transform: translateY(-4px) scale(1.02);
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(34, 211, 238, 0.3);
+  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.15);
+}
+
+/* 4. BACKGROUND WATERMARK */
+.hero-with-watermark {
+  position: relative;
+}
+
+.hero-with-watermark::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 0;
+  background: url('/MojoLogo.png') center/65% no-repeat;
+  opacity: 0.065;                 /* subtle, but visible */
+  filter: blur(0.8px);
+  pointer-events: none;         /* avoid clicks */
+  mix-blend-mode: overlay;      /* nice with dark bg */
+  z-index: -1;
+}
+
+/* 5. RESPONSIVE ENHANCEMENTS */
+@media (max-width: 768px) and (min-width: 481px) {
+  .cta-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .feature-card-enhanced {
+    min-height: 140px;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+  
+  .feature-card-enhanced {
+    min-height: 120px;
+    padding: 0.75rem;
+  }
+  
+
+}
+
+/* 6. ACCESSIBILITY IMPROVEMENTS */
+.feature-card-enhanced:focus {
+  outline: 2px solid #22d3ee;
+  outline-offset: 2px;
+}
+
+/* 7. REDUCED MOTION SUPPORT */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-orb {
+    animation: none !important;
+  }
+} 

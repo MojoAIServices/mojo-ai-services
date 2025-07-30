@@ -1,0 +1,31 @@
+Contact: mailto:security@mojoaiservices.com
+Contact: https://mojoaiservices.com/security
+Expires: 2025-12-31T23:59:59.000Z
+Encryption: https://mojoaiservices.com/pgp-key.asc
+Preferred-Languages: en
+Canonical: https://mojoaiservices.com/.well-known/security.txt
+Policy: https://mojoaiservices.com/security-policy
+Hiring: https://mojoaiservices.com/careers
+
+# Security Policy for Mojo AI Services
+# 
+# We take security seriously and appreciate responsible disclosure.
+# 
+# Scope:
+# - mojoaiservices.com
+# - All subdomains (*.mojoaiservices.com)
+# - Mobile applications
+# 
+# Out of Scope:
+# - Social engineering attacks
+# - Physical attacks
+# - Third-party services
+# 
+# Response SLA:
+# - Acknowledgment: Within 24 hours
+# - Initial response: Within 72 hours
+# - Resolution: Within 7 days for critical issues
+# 
+# Reward Program:
+# We offer responsible disclosure rewards for qualifying vulnerabilities.
+# Please see our security policy for details. 
